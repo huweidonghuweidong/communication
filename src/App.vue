@@ -1,19 +1,26 @@
 <template>
   <div id="app">
+    <Header></Header>
     <transition :name='transitionName'>
-      <router-view></router-view>
+      <div :class="code?'app_main':'app_box'">
+        <router-view></router-view>
+      </div>
     </transition>
   </div>
 </template>
 
 <script>
-
+import Header from './components/Header.vue'
 export default {
   name: 'App',
   data(){
     return{
-      transitionName:''//动画名
+      transitionName:'',//动画名
+      code:1
     }
+  },
+  components:{
+    Header
   },
   watch:{
     //监听路由改变，通过判断路由上meat的index值判断页面是前进还是后退
@@ -42,7 +49,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background:#fff;
+  .app_main{
+    height:calc(100vh - 100px);
+    overflow-y:auto;
+  }
 }
 // 页面动画效果
 .slide-right-enter-active,
